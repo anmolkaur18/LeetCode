@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/detect-capital/
+
+class Solution {
+public:
+    int countCaps(string s){
+    int c = 0;
+    for(int i =0; i<s.size(); i++)
+        if(isupper(s[i]))
+            c++;
+    return c;
+}
+    
+    bool detectCapitalUse(string str) {
+        int c = countCaps(str);
+    if(isupper(str[0]) && (c == str.size() || c == 1))
+        return true;
+    else if (c == 0)
+        return true;
+    else
+        return false;
+    }
+};
