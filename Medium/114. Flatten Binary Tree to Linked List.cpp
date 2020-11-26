@@ -13,7 +13,8 @@
 class Solution {
 public:
     void flatten(TreeNode* root) {
-        if(!root) return;
+     //method 1  recursive
+     if(!root) return;
         TreeNode* temp, *node;
         if(root){                 //Move the left node to the right node
             temp = root->right;
@@ -27,6 +28,32 @@ public:
         node->right = temp;     //Append the right node to its end
         flatten(root->right);
     }
+ 
+ //method 2  iterative
+ if(root == NULL) return;
+        stack<TreeNode*> stack;
+        stack.push(root);
+        while(!stack.empty()) {
+            TreeNode* current = stack.top(); stack.pop();
+            if(current->right != NULL) stack.push(current->right);
+            if(current->left != NULL) stack.push(current->left);
+            if(!stack.empty()) {
+                current->right = stack.top();// e.g 1->2
+            }
+            current->left = NULL; //cause we need a right skewed tree
+        }
+        return;
+ 
+ //method 3 recursive
+ if(root == NULL) return;
+        flatten(root->right);
+        flatten(root->left);
+        root->right = prev;
+        root->left = NULL;
+        prev = root;    
+    }
+    private:
+    TreeNode* prev = NULL;
 };
 
 
